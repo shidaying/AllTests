@@ -16,6 +16,7 @@
 
 #define distanceY 100
 
+
 #define kAlphaNum   @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
 #define kAlpha      @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
@@ -25,7 +26,10 @@
 #define kNumbersPeriod  @"0123456789."
 
 @interface SLHViewController ()
-
+{
+    CGFloat positionX;
+    CGFloat positionY;
+}
 @end
 
 @implementation SLHViewController
@@ -36,6 +40,7 @@
     [self secondTest];
     [self thirdTest];
 }
+#pragma mark -private method
 - (void)firstTest
 {
     /*
