@@ -87,7 +87,7 @@
     testLabel.text = @"是一个失败者，他还需要不断地成长完善，需要不断地努力";
     [self.view addSubview:testLabel];
     NSLog(@"testLabel.frame = %@",NSStringFromCGRect(testLabel.frame));
-    //angle为正得时候，是逆时针旋转，否则就是顺时针旋转
+    //angle为正得时候，是顺时针旋转，否则就是逆时针旋转
     testLabel.transform = CGAffineTransformMakeRotation(M_PI/2);
     NSLog(@"new testLabel.frame = %@",NSStringFromCGRect(testLabel.frame));
     
