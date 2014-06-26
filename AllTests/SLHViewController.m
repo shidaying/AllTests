@@ -91,6 +91,10 @@
     testLabel.transform = CGAffineTransformMakeRotation(M_PI/2);
     NSLog(@"new testLabel.frame = %@",NSStringFromCGRect(testLabel.frame));
     
+    //两次旋转不会叠加，都是在原始的状态下旋转的
+    testLabel.transform = CGAffineTransformMakeRotation(-M_PI/2);
+    NSLog(@"latest testLabel.frame = %@",NSStringFromCGRect(testLabel.frame));
+    
     testLabel.frame = CGRectMake(positionX, positionY, 40, SCREEEN_WIDTH - 2 * positionX);
     
     positionY = positionY + testLabel.frame.size.height + distanceY;
