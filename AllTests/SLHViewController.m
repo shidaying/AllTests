@@ -12,9 +12,7 @@
 
 #define SCREEEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
-#define distanceX 20
-
-#define distanceY 100
+#define Add_Notification(selectorName, notificationName) [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectorName) name:notificationName object:nil];
 
 
 #define kAlphaNum   @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
@@ -25,20 +23,42 @@
 
 #define kNumbersPeriod  @"0123456789."
 
+#define RGB(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
+
+#define RGBA(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
+
 @interface SLHViewController ()
 {
     CGFloat positionX;
     CGFloat positionY;
+    CGFloat controlHeight;
+    CGFloat distanceY;
+    UIFont *myFont;
+    
+    UITextField *nameTextField;
 }
 @end
 
 @implementation SLHViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    Add_Notification(onKeyboardWillShowNotification:, UIKeyboardWillShowNotification);
+    Add_Notification(onKeyboardWillHideNotification:, UIKeyboardWillHideNotification)
+}
 - (void)viewDidLoad
 {
+    positionX = 20;
+    positionY = 0;
+    controlHeight = 35;
+    distanceY = 10;
+    
+    myFont = [UIFont systemFontOfSize:20];
+    
     [self firstTest];
     [self secondTest];
     [self thirdTest];
+    [self forthTest];
 }
 #pragma mark -private method
 - (void)firstTest
@@ -55,6 +75,7 @@
     }
     NSLog(@"menuName = %@",menuName);
 }
+
 - (void)secondTest
 {
     /*
@@ -62,7 +83,7 @@
      */
     
     UILabel *testLabel = [[UILabel alloc] init];
-    testLabel.frame = CGRectMake(distanceX, distanceY, SCREEEN_WIDTH - 2 * distanceX, 40);
+    testLabel.frame = CGRectMake(positionX, positionY, SCREEEN_WIDTH - 2 * positionX, controlHeight);
     testLabel.text = @"是一个失败者，他还需要不断地成长完善，需要不断地努力";
     [self.view addSubview:testLabel];
     NSLog(@"testLabel.frame = %@",NSStringFromCGRect(testLabel.frame));
@@ -70,6 +91,9 @@
     testLabel.transform = CGAffineTransformMakeRotation(M_PI/2);
     NSLog(@"new testLabel.frame = %@",NSStringFromCGRect(testLabel.frame));
     
+    testLabel.frame = CGRectMake(positionX, positionY, 40, SCREEEN_WIDTH - 2 * positionX);
+    
+    positionY = positionY + testLabel.frame.size.height + distanceY;
 }
 
 - (void)thirdTest
@@ -120,4 +144,67 @@
     }
 }
 
+- (void)forthTest
+{
+    /*
+     *fortth test 测试的是 NSValue 的应用，键盘出现时，获取键盘的大小位置等相关得信息
+     */
+    
+    nameTextField = [[UITextField alloc]initWithFrame:CGRectMake(positionX, positionY , SCREEEN_WIDTH - 2 * positionX, controlHeight)];
+    nameTextField.backgroundColor = [UIColor redColor];
+    nameTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    nameTextField.placeholder = @"请输入邮箱";
+    nameTextField.tag = 1;
+    nameTextField.delegate = self;
+    nameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+    nameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    nameTextField.returnKeyType = UIReturnKeyDone;
+    nameTextField.clearButtonMode = UITextFieldViewModeWhileEditing; //编辑时会出现个修改X
+    nameTextField.text = @"";
+    nameTextField.font = myFont;
+    [self.view addSubview:nameTextField];
+    
+    positionY = positionY + controlHeight + distanceY;
+}
+#pragma mark -notification
+- (void)onKeyboardWillShowNotification:(NSNotification*)notify
+{
+    NSDictionary* info = [notify userInfo];
+    
+    //获取键盘大小
+    NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGSize keyboardSize = [aValue CGRectValue].size;
+    
+    // 获取动画时间
+    NSValue *animationDurationValue = [info objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    
+    [UIView animateWithDuration:animationDuration animations:^{
+        nameTextField.frame = CGRectMake(nameTextField.frame.origin.x, nameTextField.frame.origin.y - keyboardSize.height, nameTextField.frame.size.width, nameTextField.frame.size.height);
+    }];
+}
+- (void)onKeyboardWillHideNotification:(NSNotification*)notify
+{
+    NSDictionary* info = [notify userInfo];
+    
+    //获取键盘大小
+    NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGSize keyboardSize = [aValue CGRectValue].size;
+    
+    // 获取动画时间
+    NSValue *animationDurationValue = [info objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    
+    [UIView animateWithDuration:animationDuration animations:^{
+        nameTextField.frame = CGRectMake(nameTextField.frame.origin.x, nameTextField.frame.origin.y + keyboardSize.height, nameTextField.frame.size.width, nameTextField.frame.size.height);
+    }];
+}
+#pragma mark -textfiled delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [nameTextField resignFirstResponder];
+    return YES;
+}
 @end

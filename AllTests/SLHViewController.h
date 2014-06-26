@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SLHViewController : UIViewController
+@interface SLHViewController : UIViewController <UITextFieldDelegate>
 
 @end
