@@ -59,6 +59,7 @@
     [self secondTest];
     [self thirdTest];
     [self forthTest];
+    [self fifthTest];
 }
 #pragma mark -private method
 - (void)firstTest
@@ -73,7 +74,7 @@
         NSString *tempStr = [NSString stringWithFormat:@"%C\n",[name characterAtIndex:i]];
         [menuName appendString:tempStr];
     }
-    NSLog(@"menuName = %@",menuName);
+    NSLog(@" firstTest menuName = %@",menuName);
 }
 
 - (void)secondTest
@@ -86,14 +87,14 @@
     testLabel.frame = CGRectMake(positionX, positionY, SCREEEN_WIDTH - 2 * positionX, controlHeight);
     testLabel.text = @"是一个失败者，他还需要不断地成长完善，需要不断地努力";
     [self.view addSubview:testLabel];
-    NSLog(@"testLabel.frame = %@",NSStringFromCGRect(testLabel.frame));
+    NSLog(@"secondTest testLabel.frame = %@",NSStringFromCGRect(testLabel.frame));
     //angle为正得时候，是顺时针旋转，否则就是逆时针旋转
     testLabel.transform = CGAffineTransformMakeRotation(M_PI/2);
-    NSLog(@"new testLabel.frame = %@",NSStringFromCGRect(testLabel.frame));
+    NSLog(@"secondTest new testLabel.frame = %@",NSStringFromCGRect(testLabel.frame));
     
     //两次旋转不会叠加，都是在原始的状态下旋转的
     testLabel.transform = CGAffineTransformMakeRotation(-M_PI/2);
-    NSLog(@"latest testLabel.frame = %@",NSStringFromCGRect(testLabel.frame));
+    NSLog(@"secondTest latest testLabel.frame = %@",NSStringFromCGRect(testLabel.frame));
     
     testLabel.frame = CGRectMake(positionX, positionY, 40, SCREEEN_WIDTH - 2 * positionX);
     
@@ -112,12 +113,12 @@
     NSString *filtered = [[firstString componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
     BOOL basic = [firstString isEqualToString:filtered];
     if ([filtered length] == 0) {
-        NSLog(@"firstString 没有英文");
+        NSLog(@"thirdTest firstString 没有英文");
     } else {
         if (basic) {
-            NSLog(@"firstString 全是英文");
+            NSLog(@"thirdTest firstString 全是英文");
         } else {
-            NSLog(@"firstString 有英文,不全是英文");
+            NSLog(@"thirdTest firstString 有英文,不全是英文");
         }
         
     }
@@ -126,24 +127,24 @@
     NSString *secondFiltered = [[secondString componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
     basic = [secondString isEqualToString:secondFiltered];
     if ([secondFiltered length] == 0) {
-        NSLog(@"secondString 没有英文");
+        NSLog(@"thirdTest secondString 没有英文");
     } else {
         if (basic) {
-            NSLog(@"secondString 全是英文");
+            NSLog(@"thirdTest secondString 全是英文");
         }
-        NSLog(@"secondString 有英文,不全是英文");
+        NSLog(@"thirdTest secondString 有英文,不全是英文");
     }
     
     NSString *thirdString = @"abc";
     NSString *thirdFiltered = [[thirdString componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
     basic = [thirdString isEqualToString:thirdFiltered];
     if ([thirdFiltered length] == 0) {
-        NSLog(@"thirdString 没有英文");
+        NSLog(@"thirdTest thirdString 没有英文");
     } else {
         if (basic) {
-            NSLog(@"thirdString 全是英文");
+            NSLog(@"thirdTest thirdString 全是英文");
         } else {
-            NSLog(@"thirdString 有英文,不全是英文");
+            NSLog(@"thirdTest thirdString 有英文,不全是英文");
         }
     }
 }
@@ -169,6 +170,43 @@
     [self.view addSubview:nameTextField];
     
     positionY = positionY + controlHeight + distanceY;
+}
+
+- (void)fifthTest
+{
+    /*
+     *fifth Test 测试的是时间与字符串间得相互转化，时间与时间戳之间的转化
+     */
+    NSDateFormatter *myDateFormatter = [[NSDateFormatter alloc] init];
+    [myDateFormatter setDateFormat:@"yyyy年MM月dd日HH时mm分ss秒"];//大写HH表示的是24小时制，小写的hh代表的是12小时制
+    [myDateFormatter setLocale:[NSLocale currentLocale]];//设置地区
+    [myDateFormatter setTimeZone:[NSTimeZone localTimeZone]];//设置时区
+    
+    NSDate *nowDate = [NSDate date];//和中国上海时间相差了八个小时
+    NSLog(@"fifthTest nowDate = %@",nowDate);
+    
+    CGFloat seconds = 8 * 60 * 60;//8个小时的秒数
+    NSDate *nowLocalDate = [nowDate dateByAddingTimeInterval:seconds];
+    NSLog(@"fifthTest nowLocalDate = %@",nowLocalDate);
+    
+    //时间转化为字符串
+    NSString *nowDateStr = [myDateFormatter stringFromDate:nowDate];
+    NSLog(@"fifthTest nowDateStr = %@",nowDateStr);
+    
+    NSString *nowLocalDateStr = [myDateFormatter stringFromDate:nowLocalDate];
+    NSLog(@"fifthTest nowLocalDateStr = %@",nowLocalDateStr);
+    
+    //字符串转化为时间
+    NSDate *dateFromStr = [myDateFormatter dateFromString:nowLocalDateStr];
+    NSLog(@"fifthTest dateFromStr = %@",dateFromStr);
+    
+    //时间转化为时间戳
+    NSInteger nowTimeInterval = [dateFromStr timeIntervalSince1970];
+    NSLog(@"fifthTest nowTimeInterval = %d",nowTimeInterval);
+    
+    //时间戳转化为时间
+    NSDate *dateFromInteger = [NSDate dateWithTimeIntervalSince1970:nowTimeInterval];
+    NSLog(@"fifthTest dateFromInteger = %@",dateFromInteger);
 }
 #pragma mark -notification
 - (void)onKeyboardWillShowNotification:(NSNotification*)notify
