@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EAE5C7E319614E9F003CB28C /* SLHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE5C7E219614E9F003CB28C /* SLHViewController.m */; };
+		EAE5C7E519614F8A003CB28C /* nopic.png in Resources */ = {isa = PBXBuildFile; fileRef = EAE5C7E419614F8A003CB28C /* nopic.png */; };
 		EAFD7B7F195AACD40078C3F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAFD7B7E195AACD40078C3F6 /* Foundation.framework */; };
 		EAFD7B81195AACD40078C3F6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAFD7B80195AACD40078C3F6 /* CoreGraphics.framework */; };
 		EAFD7B83195AACD40078C3F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAFD7B82195AACD40078C3F6 /* UIKit.framework */; };
@@ -15,7 +17,6 @@
 		EAFD7B8F195AACD40078C3F6 /* SLHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFD7B8E195AACD40078C3F6 /* SLHAppDelegate.m */; };
 		EAFD7B92195AACD40078C3F6 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAFD7B90195AACD40078C3F6 /* Main_iPhone.storyboard */; };
 		EAFD7B95195AACD40078C3F6 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAFD7B93195AACD40078C3F6 /* Main_iPad.storyboard */; };
-		EAFD7B98195AACD40078C3F6 /* SLHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFD7B97195AACD40078C3F6 /* SLHViewController.m */; };
 		EAFD7B9A195AACD40078C3F6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAFD7B99195AACD40078C3F6 /* Images.xcassets */; };
 		EAFD7BA1195AACD40078C3F6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAFD7BA0195AACD40078C3F6 /* XCTest.framework */; };
 		EAFD7BA2195AACD40078C3F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAFD7B7E195AACD40078C3F6 /* Foundation.framework */; };
@@ -35,6 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EAE5C7E119614E9F003CB28C /* SLHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLHViewController.h; sourceTree = "<group>"; };
+		EAE5C7E219614E9F003CB28C /* SLHViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLHViewController.m; sourceTree = "<group>"; };
+		EAE5C7E419614F8A003CB28C /* nopic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nopic.png; sourceTree = "<group>"; };
 		EAFD7B7B195AACD40078C3F6 /* AllTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AllTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAFD7B7E195AACD40078C3F6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EAFD7B80195AACD40078C3F6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -47,8 +51,6 @@
 		EAFD7B8E195AACD40078C3F6 /* SLHAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLHAppDelegate.m; sourceTree = "<group>"; };
 		EAFD7B91195AACD40078C3F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		EAFD7B94195AACD40078C3F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		EAFD7B96195AACD40078C3F6 /* SLHViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLHViewController.h; sourceTree = "<group>"; };
-		EAFD7B97195AACD40078C3F6 /* SLHViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLHViewController.m; sourceTree = "<group>"; };
 		EAFD7B99195AACD40078C3F6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EAFD7B9F195AACD40078C3F6 /* AllTestsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AllTestsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAFD7BA0195AACD40078C3F6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -81,6 +83,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EAE5C7DE19614E9F003CB28C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EAE5C7E419614F8A003CB28C /* nopic.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		EAE5C7DF19614E9F003CB28C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EAE5C7E019614E9F003CB28C /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EAE5C7E119614E9F003CB28C /* SLHViewController.h */,
+				EAE5C7E219614E9F003CB28C /* SLHViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		EAFD7B72195AACD40078C3F6 = {
 			isa = PBXGroup;
 			children = (
@@ -114,12 +140,13 @@
 		EAFD7B84195AACD40078C3F6 /* AllTests */ = {
 			isa = PBXGroup;
 			children = (
+				EAE5C7DE19614E9F003CB28C /* Resources */,
+				EAE5C7DF19614E9F003CB28C /* View */,
+				EAE5C7E019614E9F003CB28C /* ViewController */,
 				EAFD7B8D195AACD40078C3F6 /* SLHAppDelegate.h */,
 				EAFD7B8E195AACD40078C3F6 /* SLHAppDelegate.m */,
 				EAFD7B90195AACD40078C3F6 /* Main_iPhone.storyboard */,
 				EAFD7B93195AACD40078C3F6 /* Main_iPad.storyboard */,
-				EAFD7B96195AACD40078C3F6 /* SLHViewController.h */,
-				EAFD7B97195AACD40078C3F6 /* SLHViewController.m */,
 				EAFD7B99195AACD40078C3F6 /* Images.xcassets */,
 				EAFD7B85195AACD40078C3F6 /* Supporting Files */,
 			);
@@ -234,6 +261,7 @@
 			files = (
 				EAFD7B95195AACD40078C3F6 /* Main_iPad.storyboard in Resources */,
 				EAFD7B9A195AACD40078C3F6 /* Images.xcassets in Resources */,
+				EAE5C7E519614F8A003CB28C /* nopic.png in Resources */,
 				EAFD7B92195AACD40078C3F6 /* Main_iPhone.storyboard in Resources */,
 				EAFD7B89195AACD40078C3F6 /* InfoPlist.strings in Resources */,
 			);
@@ -256,7 +284,7 @@
 			files = (
 				EAFD7B8F195AACD40078C3F6 /* SLHAppDelegate.m in Sources */,
 				EAFD7B8B195AACD40078C3F6 /* main.m in Sources */,
-				EAFD7B98195AACD40078C3F6 /* SLHViewController.m in Sources */,
+				EAE5C7E319614E9F003CB28C /* SLHViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +499,7 @@
 				EAFD7BB2195AACD50078C3F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EAFD7BB3195AACD50078C3F6 /* Build configuration list for PBXNativeTarget "AllTestsTests" */ = {
 			isa = XCConfigurationList;
@@ -479,6 +508,7 @@
 				EAFD7BB5195AACD50078C3F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
