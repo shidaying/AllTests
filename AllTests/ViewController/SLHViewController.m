@@ -72,7 +72,7 @@
     /*
      *first test 一个字符串里的每个字符后加上换行符，每行只显示一个字
      */
-    NSLog(@"************************************************************************************************");
+    NSLog(@"***********************************************************************************************");
     
     NSString *name = @"是一个失败者，他还需要不断地成长完善，需要不断地努力";
     NSMutableString *menuName = [[NSMutableString alloc] initWithCapacity:10];
@@ -165,7 +165,7 @@
      *fortth test 测试的是 NSValue 的应用，键盘出现时，获取键盘的大小位置等相关得信息
      */
     
-    NSLog(@"************************************************************************************************");
+    NSLog(@"***********************************************************************************************");
     
     nameTextField = [[UITextField alloc]initWithFrame:CGRectMake(positionX, positionY , SCREEEN_WIDTH - 2 * positionX, controlHeight)];
     nameTextField.backgroundColor = [UIColor redColor];
@@ -190,7 +190,7 @@
      *fifth Test 测试的是时间与字符串间得相互转化，时间与时间戳之间的转化
      */
     
-    NSLog(@"************************************************************************************************");
+    NSLog(@"***********************************************************************************************");
     
     NSDateFormatter *myDateFormatter = [[NSDateFormatter alloc] init];
     [myDateFormatter setDateFormat:@"yyyy年MM月dd日HH时mm分ss秒"];//大写HH表示的是24小时制，小写的hh代表的是12小时制
@@ -229,47 +229,83 @@
      *sixthTest 测试的是图片的压缩拉伸，剪切，缩小
     */
     
-    NSLog(@"************************************************************************************************");
+    NSLog(@"***********************************************************************************************");
+    
     
     CGSize targetSize = CGSizeMake(80, 80);
     UIImage *myOriginImage = [UIImage imageNamed:@"nopic.png"];
     NSLog(@"sixthTest myOriginImage frame = %@",NSStringFromCGSize(myOriginImage.size));
     
+    //转化为PNG格式的nsdata
     NSData *myOriginImagePNGData = UIImagePNGRepresentation(myOriginImage);
     NSLog(@"sixthTest myOriginImagePNGData length = %d",myOriginImagePNGData.length);//转化成png格式
     
+    //转化为JPEG格式的nsdata
     NSData *myOriginImageJPEGData = UIImageJPEGRepresentation(myOriginImage, 1.0);
     NSLog(@"sixthTest myOriginImageJPGData length = %d",myOriginImageJPEGData.length);//转化成jpeg格式
     
+    //转化为JPEG，降低图片质量
     NSData *myOriginImageJPEGLowerData = UIImageJPEGRepresentation(myOriginImage, 0.5);
     NSLog(@"sixthTest myOriginImageJPEGLowerData length = %d",myOriginImageJPEGLowerData.length);//转化成jpeg格式，降低图片质量
     
+    //压缩图片，生成的图片存储在本地
     UIImage *thumbImage = [self createThumbImage:myOriginImage size:targetSize percent:1 toPath:[self fielPath]];
     NSLog(@"sixthTest thumbImage size = %@",NSStringFromCGSize(thumbImage.size));
     
     NSData *thumbImageJPEGData = UIImageJPEGRepresentation(thumbImage, 1);
     NSLog(@"sixthTest thumbImageJPEGData length = %d",thumbImageJPEGData.length);
     
+    //直接压缩大小，图片会糊掉
     UIImage *scaleImage = [self scale:myOriginImage toSize:targetSize];
     NSData *scaleImageData = UIImageJPEGRepresentation(scaleImage, 1);
     NSLog(@"sixthTest scaleImageData length = %d",scaleImageData.length);
     
+    //图片缩小
     UIImage *scaleAndCroppingImage = [self imageByScalingAndCroppingWithImage:myOriginImage forSize:targetSize];
     NSData *scaleAndCroppingImageData = UIImageJPEGRepresentation(scaleAndCroppingImage, 1);
     NSLog(@"sixthTest scaleAndCroppingImageData length = %d",scaleAndCroppingImageData.length);
     
-    UIImage *imageLocal = [myOriginImage stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    //图片拉伸
+    UIImage *strechImage = [myOriginImage stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    NSData *strechImageData = UIImageJPEGRepresentation(strechImage, 1);
+    NSLog(@"sixthTest strechImageData length = %d",strechImageData.length);
     
+    UIImage *resizableImage = [myOriginImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 80, 80)];
+    NSData *resizableImageData = UIImageJPEGRepresentation(resizableImage, 1);
+    NSLog(@"sixthTest resizableImageData length = %d",resizableImageData.length);
     
-    UIImage *srcimg = [UIImage imageNamed:@"test.png"];//test.png宽172 高192
-    NSLog(@"image width = %f,height = %f",srcimg.size.width,srcimg.size.height);
-    UIImageView *imgview = [[UIImageView alloc] init];
-    imgview.frame = CGRectMake(10, 150, 300, 220);
-    CGRect rect =  CGRectMake(0, 0, 300, 100);//要裁剪的图片区域，按照原图的像素大小来，超过原图大小的边自动适配
-    CGImageRef cgimg = CGImageCreateWithImageInRect([srcimg CGImage], rect);
-    imgview.image = [UIImage imageWithCGImage:cgimg];
-    CGImageRelease(cgimg);／／用完一定要释放，否则内存泄露
-    [self.view addSubview:imgview];
+    UIImage *resizableModeImage = [myOriginImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 80, 80) resizingMode:UIImageResizingModeStretch];
+    NSData *resizableModelImageData = UIImageJPEGRepresentation(resizableModeImage, 1);
+    NSLog(@"sixthTest resizableModelImageData length = %d",resizableModelImageData.length);
+    
+    //图片生成缩略图
+    CGRect rect = CGRectMake(0, 0, 80, 80);//创建矩形框
+    UIGraphicsBeginImageContext(rect.size);//根据size大小创建一个基于位图的图形上下文
+    CGContextRef currentContext = UIGraphicsGetCurrentContext();//获取当前quartz 2d绘图环境
+    CGContextClipToRect(currentContext, rect);//设置当前绘图环境到矩形框
+    CGContextRotateCTM(currentContext, M_PI);
+    CGContextTranslateCTM(currentContext, -rect.size.width, -rect.size.height);
+    //CGContextTranslateCTM(currentContext,0.0,200.0);
+    CGContextDrawImage(currentContext, rect, myOriginImage.CGImage);//绘图
+    //[image drawInRect:rect];
+    UIImage *croppedImage = UIGraphicsGetImageFromCurrentImageContext();//获得图片
+    UIGraphicsEndImageContext();//从当前堆栈中删除quartz 2d绘图环境
+    
+    UIImageView *contentImageView = [[UIImageView alloc] initWithFrame:rect];
+    contentImageView.image=croppedImage;
+    contentImageView.transform = CGAffineTransformIdentity;
+    contentImageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    
+    NSData *croppedImageData = UIImageJPEGRepresentation(croppedImage, 1);
+    NSLog(@"sixthTest croppedImageData length = %d",croppedImageData.length);
+    
+    //图片裁剪
+    CGRect newRect =  rect;//要裁剪的图片区域，按照原图的像素大小来，超过原图大小的边自动适配
+    CGImageRef cgimage = CGImageCreateWithImageInRect([myOriginImage CGImage], newRect);
+    UIImage *croppingImage = [UIImage imageWithCGImage:cgimage];
+    NSData *croppingImageData = UIImageJPEGRepresentation(croppingImage, 1);
+    NSLog(@"sixthTest croppingImageData length = %d",croppingImageData.length);
+    CGImageRelease(cgimage);//用完一定要释放，否则内存泄露
 }
 /*
  *沙盒路径
